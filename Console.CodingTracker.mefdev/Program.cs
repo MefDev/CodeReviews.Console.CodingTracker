@@ -3,7 +3,6 @@ using CodingLogger.Controller;
 using CodingLogger.Data;
 using CodingLogger.Models;
 using CodingLogger.Services;
-using CodingLogger.Shared.Logger;
 using Spectre.Console;
 
 
@@ -13,11 +12,11 @@ class Application
     private static UserInput s_userInput;
     private static CodingController s_codingController;
     private static CodingSessionRepository s_codingSessionRepository;
-    public static string DBNAME
+    public static string DBname
     {
         get => ReadSetting("DB_NAME");
     }
-    public static string CONNECTIONSTRING
+    public static string connectionString
     {
         get => GetConnectionString();
     }
@@ -73,7 +72,7 @@ class Application
         {
             var connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
             connectionString = connectionString.
-                Replace("{PATH}", GetFilePath(DBNAME));
+                Replace("{PATH}", GetFilePath(DBname));
             return connectionString;
         }
         catch (Exception ex)
@@ -84,14 +83,14 @@ class Application
 
     private static void InitializeDB()
     {
-        string tableName = GetDBNameWithoutExtension(DBNAME);
-        new DBStorage(CONNECTIONSTRING, tableName);
+        string tableName = GetDBNameWithoutExtension(DBname);
+        new DBStorage(connectionString, tableName);
     }
 
     private static void InitializeHelperServices()
     {
         s_codingController = new CodingController();
-        s_codingSessionRepository = new CodingSessionRepository(CONNECTIONSTRING);
+        s_codingSessionRepository = new CodingSessionRepository(connectionString);
         s_userInput = new UserInput(null);
         s_codingService = new CodingService(s_codingSessionRepository, s_userInput, s_codingController);
         s_userInput = new UserInput(s_codingService);

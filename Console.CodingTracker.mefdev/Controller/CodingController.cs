@@ -1,5 +1,4 @@
-﻿using System;
-using CodingLogger.Models;
+﻿using CodingLogger.Models;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
