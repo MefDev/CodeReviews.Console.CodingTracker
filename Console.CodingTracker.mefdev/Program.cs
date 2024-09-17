@@ -1,9 +1,9 @@
-﻿using System.Configuration;
-using CodingLogger.Controller;
+﻿using CodingLogger.Controller;
 using CodingLogger.Data;
 using CodingLogger.Models;
 using CodingLogger.Services;
 using Spectre.Console;
+using System.Configuration;
 
 
 class Application
