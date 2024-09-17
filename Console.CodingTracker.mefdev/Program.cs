@@ -12,11 +12,11 @@ class Application
     private static UserInput s_userInput;
     private static CodingController s_codingController;
     private static CodingSessionRepository s_codingSessionRepository;
-    public static string DBname
+    public static string DBName
     {
         get => ReadSetting("DB_NAME");
     }
-    public static string connectionString
+    public static string ConnectionString
     {
         get => GetConnectionString();
     }
@@ -72,7 +72,7 @@ class Application
         {
             var connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
             connectionString = connectionString.
-                Replace("{PATH}", GetFilePath(DBname));
+                Replace("{PATH}", GetFilePath(DBName));
             return connectionString;
         }
         catch (Exception ex)
@@ -83,14 +83,14 @@ class Application
 
     private static void InitializeDB()
     {
-        string tableName = GetDBNameWithoutExtension(DBname);
-        new DBStorage(connectionString, tableName);
+        string tableName = GetDBNameWithoutExtension(DBName);
+        new DBStorage(ConnectionString, tableName);
     }
 
     private static void InitializeHelperServices()
     {
         s_codingController = new CodingController();
-        s_codingSessionRepository = new CodingSessionRepository(connectionString);
+        s_codingSessionRepository = new CodingSessionRepository(ConnectionString);
         s_userInput = new UserInput(null);
         s_codingService = new CodingService(s_codingSessionRepository, s_userInput, s_codingController);
         s_userInput = new UserInput(s_codingService);
