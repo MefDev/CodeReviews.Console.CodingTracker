@@ -4,8 +4,6 @@ using CodingLogger.Models;
 using CodingLogger.Services;
 using Spectre.Console;
 using System.Configuration;
-
-
 class Application
 {
     private static CodingService s_codingService;
@@ -52,6 +50,7 @@ class Application
 
         try
         {
+            
             var appSettings = ConfigurationManager.AppSettings;
             string? result = appSettings.Get(key);
             if (string.IsNullOrEmpty(result))
